@@ -12,7 +12,7 @@ import javax.persistence.Id;
 public class Dog {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Integer id;
     private String dogName;
     private String breed;
     private String origin;

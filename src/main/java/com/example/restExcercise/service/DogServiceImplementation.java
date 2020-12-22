@@ -1,8 +1,8 @@
 package com.example.restExcercise.service;
 
 import com.example.restExcercise.entity.Dog;
+import com.example.restExcercise.exception.DogNotFoundException;
 import com.example.restExcercise.repository.DogRepository;
-import com.example.restExcercise.service.DogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,5 +34,22 @@ public class DogServiceImplementation implements DogService {
     @Override
     public List<String> getAllNames() {
         return dogRepository.getAllNames();
+    }
+
+    @Override
+    public Dog getDogById(Integer id) {
+        Optional<Dog> byId = dogRepository.findById(id);
+        return byId.orElseThrow(DogNotFoundException::new);
+    }
+
+    @Override
+    public Dog update(Dog dog) {
+        return dogRepository.save(dog);
+    }
+
+    @Override
+    public Boolean delete(Integer id) {
+        dogRepository.deleteById(id);
+        return true;
     }
 }
